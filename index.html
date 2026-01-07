@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMAANG 2026 | LNJPIT Space Fleet</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <link href="fonts.googleapis.com" rel="stylesheet">
+
+
+    <style>
+        
+        :root { 
+            --primary: #ff9f43; 
+            --secondary: #54a0ff;
+            --bg-dark: #09090b; 
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #webgl-container { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: -1; 
+        }
+
+       
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; position: fixed; width: 100%; top: 0; z-index: 100;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
+        
+        
+        .logo { 
+            font-size: 28px; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            cursor: pointer;
+            
+            
+            background: linear-gradient(90deg, #ffffff, #ff9f43, #ffffff);
+            background-size: 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            to { background-position: 200%; }
+        }
+
+        
+        .nav-links { display: flex; gap: 30px; }
+        
+        .nav-links a { 
+            color: rgba(255,255,255,0.9); 
+            text-decoration: none; 
+            font-weight: 600; 
+            font-size: 16px; 
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+        }
+
+        
+        .nav-links a:hover { 
+            color: var(--primary); 
+            transform: scale(1.1);
+            text-shadow: 0 0 15px rgba(255, 159, 67, 0.8);
+        }
+
+        .nav-links a::after {
+            content: ''; position: absolute; width: 0; height: 3px;
+            bottom: 0; left: 0; background: var(--primary);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        
+        .nav-links a:active {
+            transform: scale(0.95);
+            color: #fff;
+        }
+
+        
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            pointer-events: none; user-select: none;
+        }
+
+        .hero h1 {
+            font-size: 10vw; line-height: 1; font-weight: 900; color: white;
+            mix-blend-mode: overlay; opacity: 0.9; letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+        
+       
+        .dynamic-text-container {
+            font-size: 3.8rem; 
+            font-weight: bold;
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+            
+           
+            animation: zoomLoop 5s ease-in-out infinite;
+        }
+
+        @keyframes zoomLoop {
+            0% { opacity: 0; transform: scale(0.5) translateZ(-100px); filter: blur(10px); }
+            20% { opacity: 1; transform: scale(1) translateZ(0); filter: blur(0); }
+            80% { opacity: 1; transform: scale(1) translateZ(0); filter: blur(0); }
+            100% { opacity: 0; transform: scale(1.5) translateZ(50px); filter: blur(20px); }
+        }
+
+        
+        .letter-span {
+            display: inline-block;
+            animation: rainbowColor 2s infinite linear;
+        }
+
+        @keyframes rainbowColor {
+            0% { color: #ff9f43; text-shadow: 0 0 10px #ff9f43; }
+            33% { color: #54a0ff; text-shadow: 0 0 10px #54a0ff; }
+            66% { color: #ff6b6b; text-shadow: 0 0 10px #ff6b6b; }
+            100% { color: #ff9f43; text-shadow: 0 0 10px #ff9f43; }
+        }
+
+        
+        .scroll-hint {
+            position: absolute; bottom: 50px; display: flex;
+            flex-direction: column; align-items: center; opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+        }
+        .mouse-icon {
+            width: 30px; height: 50px; border: 2px solid white;
+            border-radius: 20px; margin-bottom: 10px; position: relative;
+        }
+        .mouse-icon::before {
+            content: ''; position: absolute; top: 10px; left: 50%;
+            transform: translateX(-50%); width: 4px; height: 4px;
+            background: white; border-radius: 50%; animation: scroll 1.5s infinite;
+        }
+        @keyframes scroll { 0% { top: 10px; opacity: 1; } 100% { top: 30px; opacity: 0; } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        .fest-logo {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900; 
+        letter-spacing: 2px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="webgl-container"></div>
+    
+    <nav>
+        <div class="logo" style = "font-size: 2 rem;">LNJPIT | UMAANG</div>
+        
+        <div class="nav-links">
+            <a href="index.html" class = fest-logo>Home</a>
+            <a href="event.html" class = fest-logo>Events</a>
+            <a href="about.html" class = fest-logo>About Us</a>
+            <a href="contact.html" class = fest-logo>Contact Us</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <p class="dynamic-text-container" id="animatedText">Literary Club
+            
+        </p>
+        
+        
+        <h1>UMAANG</h1>
+        
+        <div class="scroll-hint">
+            <div class="mouse-icon"></div>
+            <span>SCROLL TO LAUNCH FLEET</span>
+            
+            
+        </div>
+    </section>
+
+    <script>
+       
+        const textContainer = document.getElementById('animatedText');
+        const textString = textContainer.innerText;
+        
+        
+        textContainer.innerHTML = '';
+        textString.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.innerText = char === ' ' ? '\u00A0' : char; 
+            span.classList.add('letter-span');
+            
+            span.style.animationDelay = `-${index * 0.1}s`; 
+            textContainer.appendChild(span);
+        });
+
+
+        
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x09090b, 0.002); 
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1500);
+        camera.position.z = 100;
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById('webgl-container').appendChild(renderer.domElement);
+
+        
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+        const sunLight = new THREE.DirectionalLight(0xffffff, 1);
+        sunLight.position.set(10, 20, 10);
+        scene.add(sunLight);
+
+        
+        const geometry = new THREE.BufferGeometry();
+        const count = 3000;
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+        const color1 = new THREE.Color("#6c5ce7"); 
+        const color2 = new THREE.Color("#ff9f43"); 
+        for(let i = 0; i < count; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 600; 
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 600; 
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 1000; 
+            const mixedColor = color1.clone().lerp(color2, Math.random());
+            colors[i * 3] = mixedColor.r;
+            colors[i * 3 + 1] = mixedColor.g;
+            colors[i * 3 + 2] = mixedColor.b;
+        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        const starMat = new THREE.PointsMaterial({ size: 0.8, vertexColors: true, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
+        const starField = new THREE.Points(geometry, starMat);
+        scene.add(starField);
+
+        
+        const rocketMatWhite = new THREE.MeshLambertMaterial({color: 0xdddddd}); 
+        const rocketMatOrange = new THREE.MeshBasicMaterial({color: 0xff9f43}); 
+        function createRocket() {
+            const group = new THREE.Group();
+            const b = new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 5, 12), rocketMatWhite);
+            b.rotation.x = Math.PI / 2; group.add(b);
+            const n = new THREE.Mesh(new THREE.ConeGeometry(0.8, 2, 12), rocketMatOrange);
+            n.rotation.x = Math.PI / 2; n.position.z = 3.5; group.add(n);
+            const finGeo = new THREE.BoxGeometry(0.2, 3, 2);
+            const f1 = new THREE.Mesh(finGeo, rocketMatOrange); f1.position.set(1, 0, -1.5); group.add(f1);
+            const f2 = new THREE.Mesh(finGeo, rocketMatOrange); f2.position.set(-1, 0, -1.5); group.add(f2);
+            const engineLight = new THREE.PointLight(0xff9f43, 2, 20); engineLight.position.set(0, 0, -3); group.add(engineLight);
+            group.scale.set(2.5, 2.5, 2.5); 
+            return group;
+        }
+
+        
+        const rockets = [];
+        for(let i=0; i<15; i++) {
+            const r = createRocket();
+            r.position.x = (Math.random() - 0.5) * 800; 
+            r.position.y = (Math.random() - 0.5) * 500; 
+            r.position.z = -Math.random() * 600; 
+            r.userData.speed = 0.8 + Math.random() * 1.5;
+            r.userData.rotSpeed = (Math.random() - 0.5) * 0.02;
+            scene.add(r);
+            rockets.push(r);
+        }
+
+        
+        let scrollVelocity = 0; 
+        let friction = 0.96;    
+        window.addEventListener('wheel', (event) => { scrollVelocity += event.deltaY * 0.05; });
+
+        function animate() {
+            const positions = starField.geometry.attributes.position.array;
+            for(let i = 0; i < count; i++) {
+                positions[i * 3 + 2] += scrollVelocity + 0.5; 
+                if (positions[i * 3 + 2] > 200) positions[i * 3 + 2] = -800;
+                if (positions[i * 3 + 2] < -800) positions[i * 3 + 2] = 200;
+            }
+            starField.geometry.attributes.position.needsUpdate = true;
+            starField.rotation.z += 0.001;
+
+            rockets.forEach(r => {
+                r.position.z += r.userData.speed + (scrollVelocity * 0.5);
+                r.rotation.z += r.userData.rotSpeed;
+                if(r.position.z > 200) {
+                    r.position.z = -600 - Math.random() * 200; 
+                    r.position.x = (Math.random() - 0.5) * 800;
+                    r.position.y = (Math.random() - 0.5) * 500;
+                }
+            });
+
+            scrollVelocity *= friction;
+            renderer.render(scene, camera);
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>

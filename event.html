@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umang 2026 - Literary Fest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>UMANG <span>2026</span></h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="event.html">Events</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="contact.html">contact us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    
+
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title">Events</h2>
+            <div class="events-grid">
+                <div class="event-card" data-event="essay">
+                    <div class="event-icon">✍️</div>
+                    <h3>Essay Writing</h3>
+                    <p>Hindi & English</p>
+                    <div class="event-details">
+                        <span>Individual Event</span>
+                    </div>
+                    <button class="btn-view-details">View Details</button>
+                </div>
+
+                <div class="event-card" data-event="story">
+                    <div class="event-icon">📖</div>
+                    <h3>Story Writing</h3>
+                    <p>Hindi & English</p>
+                    <div class="event-details">
+                        <span>Individual Event</span>
+                    </div>
+                    <button class="btn-view-details">View Details</button>
+                </div>
+
+                <div class="event-card" data-event="gd">
+                    <div class="event-icon">💬</div>
+                    <h3>Group Discussion</h3>
+                    <p>English</p>
+                    <div class="event-details">
+                        <span>Group Event</span>
+                    </div>
+                    <button class="btn-view-details">View Details</button>
+                </div>
+
+                <div class="event-card" data-event="debate">
+                    <div class="event-icon">🎤</div>
+                    <h3>Debate</h3>
+                    <p>English</p>
+                    <div class="event-details">
+                        <span>Individual Event</span>
+                    </div>
+                    <button class="btn-view-details">View Details</button>
+                </div>
+
+                <div class="event-card" data-event="extempore">
+                    <div class="event-icon">⚡</div>
+                    <h3>Extempore</h3>
+                    <p>English</p>
+                    <div class="event-details">
+                        <span>Individual Event</span>
+                    </div>
+                    <button class="btn-view-details">View Details</button>
+                </div>
+
+                <div class="event-card" data-event="quiz">
+                    <div class="event-icon">🧠</div>
+                    <h3>Quiz Competition</h3>
+                    <p>General Knowledge</p>
+                    <div class="event-details">
+                        <span>Group of 2</span>
+                    </div>
+                    <button class="btn-view-details">View Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <div class="modal-icon" id="modalIcon">✍️</div>
+                <h2 id="modalTitle">Essay Writing</h2>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section">
+                    <h3>Event Description</h3>
+                    <p id="modalDescription"></p>
+                </div>
+                <div class="modal-section">
+                    <h3>Event Details</h3>
+                    <ul id="modalDetails"></ul>
+                </div>
+                <div class="modal-section">
+                    <h3>Rules & Guidelines</h3>
+                    <ul id="modalRules"></ul>
+                </div>
+                <div class="modal-actions">
+                    <a href="#" id="ruleBookLink" class="btn btn-primary" target="_blank">
+                        📄 Download Rulebook
+                    </a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc10mM4EjxY8EC2FXKK9dWu1aeDxuhn1eXmS-qOhhvQnObnOw/viewform?usp=publish-editor" id="registerLink" class="btn btn-secondary" target="_blank">
+                        📝 Register Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Umang 2026</h3>
+                    <p>Literary Club</p>
+                    <p>Lok Nayak Jai Prakash Institute of Technology</p>
+                    <p>Chapra</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#register">Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: literaryclub@lnjpit.ac.in</p>
+                    <p>Phone: +91 XXXXX XXXXX</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Umang Literary Fest. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
